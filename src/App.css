@@ -1,0 +1,15 @@
+.app {
+  width: 100vw;
+
+  min-height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background-color: #fafafa;
+}
+
+.content {
+  flex: 1;
+}

@@ -1,5 +1,11 @@
 import './App.css';
 
 export default function App() {
-  return <h1>Hello, Tasuku!</h1>;
+  return (
+    <div className="app">
+      <div className="content"></div>
+
+      <div className="footer"></div>
+    </div>
+  );
 }
