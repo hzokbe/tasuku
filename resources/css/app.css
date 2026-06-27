@@ -20,11 +20,31 @@
         @apply text-xl;
     }
 
+    input {
+        @apply border border-neutral-950 outline-none pb-1 pt-1 px-4 rounded-sm;
+    }
+
+    a, button {
+        @apply border border-neutral-950 outline-none pb-1 pt-1 px-4 rounded-sm;
+    }
+
+    button {
+        @apply cursor-pointer;
+    }
+
     .card {
         @apply border border-neutral-950 m-4 p-4 rounded-sm;
     }
 
     .task-card {
         @apply border border-neutral-950 mb-4 mt-4 p-4 rounded-sm;
+    }
+
+    .form {
+        @apply border border-neutral-950 flex flex-col gap-2 mb-4 mt-4 p-4 rounded-sm;
+    }
+
+    .field {
+        @apply flex flex-col gap-1;
     }
 }
