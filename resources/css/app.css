@@ -47,4 +47,8 @@
     .button {
         @apply border border-neutral-950 cursor-pointer outline-none pb-1 pt-1 px-4 rounded-sm;
     }
+
+    .destroy-button {
+        @apply border border-red-600 cursor-pointer outline-none pb-1 pt-1 px-4 rounded-sm text-red-600;
+    }
 }
