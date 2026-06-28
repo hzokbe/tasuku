@@ -57,4 +57,11 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index');
     }
+
+    public function complete(Task $task)
+    {
+        $task->update(['completed_at' => $task->completed_at ? null : now()]);
+
+        return redirect()->back();
+    }
 }

@@ -9,8 +9,12 @@
         @foreach($tasks as $task)
             <div class="flex items-center task-card">
                 <div class="flex-1">
-                    <h2>
+                    <h2 class="flex gap-2">
                         <a href="{{ route('tasks.show', $task) }}">{{$task->title}}</a>
+                        <form action="{{ route('tasks.complete', $task) }}" method="POST">
+                            @csrf @method('PATCH')
+                            <input type="checkbox" @checked($task->completed_at != null) onchange="this.form.submit()"/>
+                        </form>
                     </h2>
                     <p>{{$task->description}}</p>
                 </div>
