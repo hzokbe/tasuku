@@ -14,8 +14,12 @@
                     </h2>
                     <p>{{$task->description}}</p>
                 </div>
-                <div>
+                <div class="flex gap-2">
                     <a class="button" href="{{ route('tasks.edit', $task) }}">Edit task</a>
+                    <form action="{{ route('tasks.destroy', $task) }}" method="POST">
+                        @csrf @method('DELETE')
+                        <button class="destroy-button" type="submit">Destroy task</button>
+                    </form>
                 </div>
             </div>
         @endforeach
