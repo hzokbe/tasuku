@@ -29,4 +29,25 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index');
     }
+
+    public function show(Task $task)
+    {
+        return view('tasks.show', compact('task'));
+    }
+
+    public function edit(Task $task)
+    {
+        return view('tasks.edit', compact('task'));
+    }
+
+    public function update(Request $request, Task $task)
+    {
+        $request->validate([
+            'title' => 'filled|max:255',
+        ]);
+
+        $task->update($request->only('title', 'description'));
+
+        return redirect()->route('tasks.index');
+    }
 }

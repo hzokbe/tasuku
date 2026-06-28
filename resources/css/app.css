@@ -24,12 +24,8 @@
         @apply border border-neutral-950 outline-none pb-1 pt-1 px-4 rounded-sm;
     }
 
-    a, button {
-        @apply border border-neutral-950 outline-none pb-1 pt-1 px-4 rounded-sm;
-    }
-
     button {
-        @apply cursor-pointer;
+        @apply border border-neutral-950 cursor-pointer outline-none pb-1 pt-1 px-4 rounded-sm;
     }
 
     .card {
@@ -46,5 +42,9 @@
 
     .field {
         @apply flex flex-col gap-1;
+    }
+
+    .button {
+        @apply border border-neutral-950 cursor-pointer outline-none pb-1 pt-1 px-4 rounded-sm;
     }
 }
