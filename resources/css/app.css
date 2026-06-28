@@ -24,6 +24,10 @@
         @apply border border-neutral-950 outline-none pb-1 pt-1 px-4 rounded-sm;
     }
 
+    input[type="checkbox"] {
+        @apply accent-neutral-950;
+    }
+
     button {
         @apply border border-neutral-950 cursor-pointer outline-none pb-1 pt-1 px-4 rounded-sm;
     }
