@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const router = useRouter();
+</script>
+
 <template>
   <div class="h-screen flex items-center justify-center px-4">
     <UButton
@@ -5,8 +9,8 @@
       color="neutral"
       icon="i-lucide-chevron-left"
       size="xl"
-      to="/"
       variant="subtle"
+      @click="router.back()"
     />
     <UPageCard class="max-w-sm w-full" variant="subtle">
       <slot />

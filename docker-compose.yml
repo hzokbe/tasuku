@@ -17,8 +17,25 @@ services:
       - "${DB_PORT:-5432}:5432"
     volumes:
       - tasuku-db:/var/lib/postgresql
+  tasuku-redis:
+    container_name: tasuku-redis
+    image: redis:alpine
+    networks:
+      - tasuku
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - tasuku-redis:/data
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+      - "1025:1025"
 networks:
   tasuku:
     name: tasuku
 volumes:
   tasuku-db:
+  tasuku-redis:

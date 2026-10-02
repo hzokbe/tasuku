@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 use Tests\TestCase;
 
 /*
@@ -14,3 +17,29 @@ use Tests\TestCase;
 */
 
 pest()->extend(TestCase::class)->in('Feature');
+
+
+function makeUser(array $overrides = []): User
+{
+    return User::factory()->create(array_merge([
+        'username' => 'john_doe',
+        'email' => 'john@example.com',
+        'password_hash' => Hash::make('old-password'),
+    ], $overrides));
+}
+
+function storeToken(string $email, string $token = 'valid-token'): string
+{
+    Redis::setex("password-reset:email:{$email}", 300, $token);
+    Redis::setex("password-reset:token:{$token}", 300, $email);
+
+    return $token;
+}
+
+function resetPayload(array $overrides = []): array
+{
+    return array_merge([
+        'password' => 'new-password',
+        'password_confirmation' => 'new-password',
+    ], $overrides);
+}

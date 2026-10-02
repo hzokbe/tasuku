@@ -18,4 +18,8 @@ Route::middleware([
     Route::post('sign-up', [AuthController::class, 'signUp']);
 
     Route::post('sign-in', [AuthController::class, 'signIn']);
+
+    Route::post('recover-password', [AuthController::class, 'sendResetPasswordLink']);
+
+    Route::post('reset-password/{token}', [AuthController::class, 'resetPassword']);
 });

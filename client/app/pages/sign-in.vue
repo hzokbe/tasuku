@@ -66,5 +66,11 @@ definePageMeta({
       Don't have an account?
       <ULink class="text-primary font-medium" to="/sign-up">Sign-up</ULink>.
     </template>
+    <template #footer>
+      Forgot your password?
+      <ULink class="text-primary font-medium" to="/forgot-password">
+        Reset your password
+      </ULink>
+    </template>
   </UAuthForm>
 </template>
