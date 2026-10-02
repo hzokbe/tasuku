@@ -46,7 +46,6 @@ const { signOut } = useAuth();
           variant="ghost"
           @click="signOut"
         />
-        <UButton color="neutral" label="My lists" to="/lists" />
       </template>
     </template>
     <template v-if="!user" #body>

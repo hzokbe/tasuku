@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ListController;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Http\Request;
@@ -39,4 +40,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         return response()->noContent();
     });
+
+    Route::get('lists', [ListController::class, 'getAll']);
 });
