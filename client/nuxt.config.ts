@@ -4,4 +4,9 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
   css: ['~/assets/css/main.css'],
   ssr: true,
+  runtimeConfig: {
+    public: {
+      apiUrl: 'http://localhost:8000',
+    },
+  },
 });
