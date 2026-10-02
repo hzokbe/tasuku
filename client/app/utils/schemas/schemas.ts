@@ -20,3 +20,10 @@ export const signUpSchema = z
   });
 
 export type SignUpData = z.infer<typeof signUpSchema>;
+
+export const signInSchema = z.object({
+  email: z.email('Invalid e-mail').transform((value) => value.toLowerCase()),
+  password: z.string(),
+});
+
+export type SignInData = z.infer<typeof signInSchema>;

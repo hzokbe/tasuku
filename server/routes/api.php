@@ -16,4 +16,6 @@ Route::middleware([
     StartSession::class,
 ])->group(function () {
     Route::post('sign-up', [AuthController::class, 'signUp']);
+
+    Route::post('sign-in', [AuthController::class, 'signIn']);
 });

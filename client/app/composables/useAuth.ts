@@ -1,4 +1,4 @@
-import type { SignUpData } from '~/utils/schemas/schemas.ts';
+import type { SignInData, SignUpData } from '~/utils/schemas/schemas.ts';
 
 export const useAuth = () => {
   const api = useAPI();
@@ -11,5 +11,11 @@ export const useAuth = () => {
     return api('/api/sign-up', { method: 'POST', body: payload });
   };
 
-  return { signUp };
+  const signIn = async (payload: SignInData) => {
+    await csrf();
+
+    return api('/api/sign-in', { method: 'POST', body: payload });
+  };
+
+  return { signUp, signIn };
 };
