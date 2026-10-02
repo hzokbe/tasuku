@@ -7,18 +7,24 @@ import type {
 export const useAuth = () => {
   const api = useAPI();
 
+  const user = useUser();
+
   const csrf = () => api('/sanctum/csrf-cookie');
 
   const signUp = async (payload: SignUpData) => {
     await csrf();
 
-    return api('/api/sign-up', { method: 'POST', body: payload });
+    await api('/api/sign-up', { method: 'POST', body: payload });
+
+    return fetchUser();
   };
 
   const signIn = async (payload: SignInData) => {
     await csrf();
 
-    return api('/api/sign-in', { method: 'POST', body: payload });
+    await api('/api/sign-in', { method: 'POST', body: payload });
+
+    return fetchUser();
   };
 
   const sendResetPasswordLink = async (email: string) => {
@@ -41,5 +47,32 @@ export const useAuth = () => {
     });
   };
 
-  return { signUp, signIn, sendResetPasswordLink, resetPassword };
+  const fetchUser = async () => {
+    try {
+      user.value = await api<User>('/api/me');
+    } catch (error) {
+      user.value = null;
+    }
+
+    return user.value;
+  };
+
+  const signOut = async () => {
+    try {
+      await api('/api/sign-out', { method: 'POST' });
+    } finally {
+      user.value = null;
+
+      await navigateTo('/sign-in');
+    }
+  };
+
+  return {
+    signUp,
+    signIn,
+    sendResetPasswordLink,
+    resetPassword,
+    fetchUser,
+    signOut,
+  };
 };

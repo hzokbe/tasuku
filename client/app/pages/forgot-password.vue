@@ -45,6 +45,7 @@ const onSubmit = async (event: FormSubmitEvent<ForgotPasswordData>) => {
 
 definePageMeta({
   layout: 'auth',
+  middleware: ['lists-redirect'],
 });
 </script>
 

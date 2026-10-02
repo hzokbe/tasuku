@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,20 @@ Route::middleware([
     Route::post('recover-password', [AuthController::class, 'sendResetPasswordLink']);
 
     Route::post('reset-password/{token}', [AuthController::class, 'resetPassword']);
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('me', function () {
+        return Auth::user();
+    });
+
+    Route::post('sign-out', function (Request $request) {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->noContent();
+    });
 });

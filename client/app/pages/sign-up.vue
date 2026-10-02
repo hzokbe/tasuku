@@ -55,6 +55,7 @@ const onSubmit = async (event: FormSubmitEvent<SignUpData>) => {
 
 definePageMeta({
   layout: 'auth',
+  middleware: ['lists-redirect'],
 });
 </script>
 

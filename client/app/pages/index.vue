@@ -35,6 +35,10 @@ const links: ButtonProps[] = [
     variant: 'subtle',
   },
 ];
+
+definePageMeta({
+  middleware: ['lists-redirect'],
+});
 </script>
 
 <template>

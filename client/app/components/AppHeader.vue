@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+const user = useUser();
+
+const { signOut } = useAuth();
+</script>
+
 <template>
   <UHeader>
     <template #left>
@@ -10,29 +16,40 @@
     </template>
     <template #right>
       <UColorModeButton />
-      <UButton
-        class="lg:hidden"
-        color="neutral"
-        icon="i-lucide-log-in"
-        to="/sign-in"
-        variant="ghost"
-      />
-      <UButton
-        class="hidden lg:inline-flex"
-        color="neutral"
-        label="Sign-in"
-        to="/sign-in"
-        variant="outline"
-      />
-      <UButton
-        class="hidden lg:inline-flex"
-        color="neutral"
-        label="Sign-up"
-        to="/sign-up"
-        trailing-icon="i-lucide-arrow-right"
-      />
+      <template v-if="!user">
+        <UButton
+          class="lg:hidden"
+          color="neutral"
+          icon="i-lucide-log-in"
+          to="/sign-in"
+          variant="ghost"
+        />
+        <UButton
+          class="hidden lg:inline-flex"
+          color="neutral"
+          label="Sign-in"
+          to="/sign-in"
+          variant="outline"
+        />
+        <UButton
+          class="hidden lg:inline-flex"
+          color="neutral"
+          label="Sign-up"
+          to="/sign-up"
+          trailing-icon="i-lucide-arrow-right"
+        />
+      </template>
+      <template v-else>
+        <UButton
+          color="neutral"
+          icon="i-lucide-log-out"
+          variant="ghost"
+          @click="signOut"
+        />
+        <UButton color="neutral" label="My lists" to="/lists" />
+      </template>
     </template>
-    <template #body>
+    <template v-if="!user" #body>
       <UButton
         block
         class="mb-3"

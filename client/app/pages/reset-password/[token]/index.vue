@@ -53,6 +53,7 @@ const onSubmit = async (event: FormSubmitEvent<ResetPasswordData>) => {
 
 definePageMeta({
   layout: 'auth',
+  middleware: ['lists-redirect'],
 });
 </script>
 
