@@ -1,4 +1,5 @@
 import type { List } from '~/types/list.ts';
+import type { ListData } from '~/utils/schemas/schemas.ts';
 
 export const useLists = () => {
   const api = useAPI();
@@ -13,5 +14,9 @@ export const useLists = () => {
     }
   };
 
-  return { lists, fetchLists };
+  const createList = async (payload: ListData) => {
+    return await api<List>('/api/lists', { method: 'POST', body: payload });
+  };
+
+  return { lists, fetchLists, createList };
 };

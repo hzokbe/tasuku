@@ -1,7 +1,31 @@
 <script lang="ts" setup>
-const { lists, fetchLists } = useLists();
+import ListFormModal from '~/components/ListFormModal.vue';
+import type { ListData } from '~/utils/schemas/schemas.ts';
+
+const { lists, fetchLists, createList } = useLists();
 
 await fetchLists();
+
+const showListFormModal = ref(false);
+
+const toast = useToast();
+
+const submitted = async (data: ListData) => {
+  try {
+    await createList(data);
+
+    toast.add({
+      title: 'List created successfully.',
+    });
+
+    await fetchLists();
+  } catch (error: any) {
+    toast.add({
+      title: "Couldn't create the list.",
+      description: 'Something went wrong. Please try again.',
+    });
+  }
+};
 
 definePageMeta({
   middleware: ['home-redirect'],
@@ -19,6 +43,7 @@ definePageMeta({
         class="mt-4"
         icon="i-lucide-plus"
         label="Create list"
+        @click="showListFormModal = true"
       />
     </UPageHeader>
     <UPageBody>
@@ -58,5 +83,6 @@ definePageMeta({
         title="No lists yet"
       />
     </UPageBody>
+    <ListFormModal v-model:open="showListFormModal" @submitted="submitted" />
   </UContainer>
 </template>
