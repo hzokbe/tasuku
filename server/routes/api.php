@@ -42,4 +42,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::get('lists', [ListController::class, 'getAll']);
+
+    Route::post('lists', [ListController::class, 'create']);
 });

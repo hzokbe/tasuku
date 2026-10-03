@@ -45,3 +45,12 @@ export const resetPasswordSchema = z
   });
 
 export type ResetPasswordData = z.infer<typeof resetPasswordSchema>;
+
+export const listSchema = z.object({
+  title: z
+    .string({ error: 'Title is required' })
+    .min(3, 'Must be at least 3 characters'),
+  description: z.string().optional(),
+});
+
+export type ListData = z.output<typeof listSchema>;
