@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Tasuku.csproj"/>
+  <Project Path="Tasuku.Tests/Tasuku.Tests.csproj"/>
+</Solution>

@@ -1,0 +1,49 @@
+services:
+  db:
+    container_name: tasuku-db
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-tasuku}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-tasuku}
+      POSTGRES_DB: ${DB_DATABASE:-tasuku}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME:-tasuku}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    image: postgres:18-alpine
+    networks:
+      - tasuku
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - db:/var/lib/postgresql
+  server:
+    build: ./server
+    container_name: tasuku-server
+    networks:
+      - tasuku
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Default: Host=db;Port=5432;Database=${DB_DATABASE:-tasuku};Username=${DB_USERNAME:-tasuku};Password=${DB_PASSWORD:-tasuku}
+    expose:
+      - "8080"
+  client:
+    build: ./client
+    container_name: tasuku-client
+    networks:
+      - tasuku
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    environment:
+      NUXT_API_INTERNAL_URL: http://tasuku-server:8080
+      NUXT_PUBLIC_APP_URL: http://localhost:3000
+networks:
+  tasuku:
+    name: tasuku
+volumes:
+  db:
