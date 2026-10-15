@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Moq;
-using Tasuku.Controllers;
-using Tasuku.DTO;
+using Tasuku.Controllers.Health;
+using Tasuku.DTO.Health;
 
 namespace Tasuku.Tests.Controllers;
 
